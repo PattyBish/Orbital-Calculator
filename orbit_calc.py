@@ -10,5 +10,8 @@ altitude = 420  # km above Earth's surface (about where the ISS flies)
 radius = EARTH_RADIUS + altitude                     # distance from Earth's center
 period = 2 * math.pi * math.sqrt(radius**3 / MU)     # Kepler's third law (seconds)
 
+minutes = period / 60
+hours = period / 3600
+
 print(f"Altitude: {altitude} km")
-print(f"Orbital period: {period:.0f} seconds")
+print(f"Orbital period: {minutes:.1f} minutes ({hours:.2f} hours)")
