@@ -5,13 +5,18 @@ import math
 MU = 398600.4418         # Earth's gravitational parameter (km^3/s^2)
 EARTH_RADIUS = 6378.137  # km
 
-altitude = 420  # km above Earth's surface (about where the ISS flies)
+# Example orbits: (name, altitude in km)
+ORBITS = [
+    ("ISS (LEO)", 420),
+    ("GPS (MEO)", 20200),
+    ("Geostationary (GEO)", 35786),
+]
 
-radius = EARTH_RADIUS + altitude                     # distance from Earth's center
-period = 2 * math.pi * math.sqrt(radius**3 / MU)     # Kepler's third law (seconds)
+def orbital_period(altitude):
+    """Return the orbital period in seconds for a circular orbit at this altitude."""
+    radius = EARTH_RADIUS + altitude                  # distance from Earth's center
+    return 2 * math.pi * math.sqrt(radius**3 / MU)    # Kepler's third law
 
-minutes = period / 60
-hours = period / 3600
-
-print(f"Altitude: {altitude} km")
-print(f"Orbital period: {minutes:.1f} minutes ({hours:.2f} hours)")
+for name, altitude in ORBITS:
+    period = orbital_period(altitude)
+    print(f"{name}: {altitude} km -> {period / 60:.1f} minutes ({period / 3600:.2f} hours)")
